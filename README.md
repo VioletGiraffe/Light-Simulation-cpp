@@ -1,3 +1,1 @@
-# Light-Simulation-JS
-
-https://artemonigiri.github.io/Light-Simulation-JS/
+# Light Simulation in C++
