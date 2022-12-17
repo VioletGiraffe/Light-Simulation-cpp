@@ -13,14 +13,14 @@ public:
 		_array.resize(w * h, {});
 	}
 
-	[[nodiscard]] constexpr T* operator[](size_t x)
+	[[nodiscard]] constexpr T* operator[](size_t y)
 	{
-		return _array.data() + x * h;
+		return _array.data() + y * w;
 	}
 
-	[[nodiscard]] constexpr const T* operator[](size_t x) const
+	[[nodiscard]] constexpr const T* operator[](size_t y) const
 	{
-		return _array.data() + x * h;
+		return _array.data() + y * w;
 	}
 
 	constexpr void fill(const T& value)

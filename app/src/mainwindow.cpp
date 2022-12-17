@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QPainter>
+#include <QElapsedTimer>
 #include <QImage>
+#include <QPainter>
 
 class View final : public QWidget
 {
@@ -54,11 +55,17 @@ MainWindow::MainWindow(QWidget *parent)
 	auto* view = new View(_field, this);
 	setCentralWidget(view);
 
-	connect(&_timer, &QTimer::timeout, view, (void (QWidget::*)())&View::update);
+	connect(&_timer, &QTimer::timeout, view, [this, view] {
+		view->update();
+		setWindowTitle(QString("Frame time: %1 ms").arg(_frameTime));
+	});
 	_timer.start(100);
 
 	connect(&_fieldTimer, &QTimer::timeout, this, [this] {
+		QElapsedTimer timer;
+		timer.start();
 		_field.update(0.01f);
+		_frameTime = timer.elapsed();
 	});
 	_fieldTimer.start(1);
 

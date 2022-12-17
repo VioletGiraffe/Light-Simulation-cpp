@@ -18,4 +18,5 @@ private:
 	WaveField _field;
 	QTimer _timer;
 	QTimer _fieldTimer;
+	int _frameTime = 0;
 };
